@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { PropertyService } from './property.service';
@@ -11,8 +11,8 @@ export class PropertyController {
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
-  getProperties(@Req() req: Request) {
-    return this.propertyService.getProperties(req.user);
+  getProperties(@Req() req: Request, @Query() params: any) {
+    return this.propertyService.getProperties(req.user, params);
   }
 
   @Post()

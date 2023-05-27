@@ -1,3 +1,3 @@
 
-  <h1> simple backend api for managing property</h1>
+  <h1> simple backend api for real estate management</h1>
   

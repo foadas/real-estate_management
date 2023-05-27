@@ -10,8 +10,15 @@ export class PropertyService {
     @InjectRepository(Property) private propertyRepo: Repository<Property>,
   ) {}
 
-  async getProperties(user: Express.User) {
-    const properties = await this.propertyRepo.find({ where: { user: user } });
+  async getProperties(user: Express.User, params: any) {
+    const properties = await this.propertyRepo.find({
+      where: {
+        user: user,
+        name: params.name,
+        location: params.location,
+        size: params.size,
+      },
+    });
     return properties;
   }
 
@@ -42,5 +49,4 @@ export class PropertyService {
       return error;
     }
   }
-  
 }
