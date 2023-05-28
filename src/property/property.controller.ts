@@ -17,8 +17,8 @@ export class PropertyController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
-  postProperty(@Body() dto: PropertyDto) {
-    return this.propertyService.postProperty(dto);
+  postProperty(@Req() req: Request, @Body() dto: PropertyDto) {
+    return this.propertyService.postProperty(req.user, dto);
   }
 
   @Put(':id')
@@ -26,13 +26,17 @@ export class PropertyController {
   async updatePropertyById(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatedProperty: PropertyDto,
+    @Req() req: Request,
   ) {
-    return this.propertyService.updateProperty(id, updatedProperty);
+    return this.propertyService.updateProperty(id, updatedProperty, req.user);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
-  async deletePropertyById(@Param('id', ParseIntPipe) id: number) {
-    return this.propertyService.deleteProperty(id);
+  async deletePropertyById(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: Request,
+  ) {
+    return this.propertyService.deleteProperty(id,req.user);
   }
 }

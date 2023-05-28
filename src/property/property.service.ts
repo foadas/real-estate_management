@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Property } from '../typeprm/entities/property.model';
 import { Repository } from 'typeorm';
 import { PropertyDto } from '../auth/dto/property.dto';
+import { User } from "../typeprm/entities/user.model";
 
 @Injectable()
 export class PropertyService {
@@ -22,9 +23,12 @@ export class PropertyService {
     return properties;
   }
 
-  async postProperty(dto: PropertyDto) {
+  async postProperty(user: Express.User, dto: PropertyDto) {
     try {
-      const createdProperty = await this.propertyRepo.create({ ...dto });
+      const createdProperty = await this.propertyRepo.create({
+        user: user,
+        ...dto,
+      });
       const savedProperty = await this.propertyRepo.save(createdProperty);
       return { saved: savedProperty };
     } catch (error: any) {
@@ -32,18 +36,21 @@ export class PropertyService {
     }
   }
 
-  async updateProperty(id, dto: PropertyDto) {
+  async updateProperty(id, dto: PropertyDto, user: Express.User) {
     //check the user access
     try {
-      const updatedProperty = this.propertyRepo.update({ id }, { ...dto });
+      const updatedProperty = this.propertyRepo.update(
+        { id, user: user },
+        { ...dto },
+      );
       return updatedProperty;
     } catch (error: any) {
       return error;
     }
   }
-  async deleteProperty(id) {
+  async deleteProperty(id, user: Express.User) {
     try {
-      const deletedProperty = this.propertyRepo.delete({ id });
+      const deletedProperty = this.propertyRepo.delete({ id, user: user });
       return deletedProperty;
     } catch (error) {
       return error;
