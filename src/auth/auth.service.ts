@@ -55,14 +55,13 @@ export class AuthService {
   }
 
   async signup(dto: SignupDto) {
-    const createdUser = this.userRepo.create({ ...dto });
     try {
+      const createdUser = this.userRepo.create({ ...dto });
       const savedUser = await this.userRepo.save(createdUser);
       console.log(savedUser);
       return { your_info: savedUser };
     } catch (err: any) {
-      if (err.code == '1') {
-      }
+      return err;
     }
   }
   async signToken(userId: number, number: number): Promise<string> {

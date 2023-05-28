@@ -1,6 +1,6 @@
-import { User } from '../typeprm/entities/user.model';
-import { Code } from '../typeprm/entities/code.model';
-import { Property } from '../typeprm/entities/property.model';
+import { User } from '../src/typeprm/entities/user.model';
+import { Code } from '../src/typeprm/entities/code.model';
+import { Property } from '../src/typeprm/entities/property.model';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
   TypeOrmModuleAsyncOptions,
