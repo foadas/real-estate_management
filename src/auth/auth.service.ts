@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../typeprm/entities/user.model';
 import { Repository } from 'typeorm';
@@ -6,7 +11,7 @@ import { LoginDto, SignupDto } from './dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Code } from '../typeprm/entities/code.model';
-
+import * as argon from 'argon2';
 @Injectable()
 export class AuthService {
   constructor(
@@ -56,8 +61,23 @@ export class AuthService {
 
   async signup(dto: SignupDto) {
     try {
-      const createdUser = this.userRepo.create({ ...dto });
+      const user = await this.userRepo.findOne({
+        where: [{ number: dto.number }, { username: dto.username }],
+      });
+      if (user) {
+        throw new HttpException(
+          'username or number already exists',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      const hash = await argon.hash(dto.password);
+      const createdUser = this.userRepo.create({
+        username: dto.username,
+        password: hash,
+        number: dto.number,
+      });
       const savedUser = await this.userRepo.save(createdUser);
+      delete savedUser.password;
       console.log(savedUser);
       return { your_info: savedUser };
     } catch (err: any) {

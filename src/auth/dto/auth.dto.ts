@@ -2,7 +2,7 @@ import {
   IsNotEmpty,
   IsNumber, IsOptional,
   IsPositive,
-  IsString,
+  IsString, Max, Min,
   MinLength
 } from "class-validator";
 
@@ -17,7 +17,6 @@ export class SignupDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @MinLength(11)
   @IsPositive()
   number: number;
 }
