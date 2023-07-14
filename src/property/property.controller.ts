@@ -6,8 +6,7 @@ import { PropertyDto } from '../auth/dto/property.dto';
 
 @Controller('properties')
 export class PropertyController {
-  constructor(private propertyService: PropertyService) {
-  }
+  constructor(private propertyService: PropertyService) {}
 
   @Get()
   @UseGuards(AuthGuard('jwt'))

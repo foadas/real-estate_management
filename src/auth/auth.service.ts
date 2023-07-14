@@ -28,6 +28,7 @@ export class AuthService {
     });
 
     if (user) {
+      delete user.password;
       console.log(user);
     } else {
       throw new NotFoundException();
@@ -90,7 +91,7 @@ export class AuthService {
       number,
     };
     const secret = this.config.get('JWT_SECRET');
-    console.log(secret);
+    //console.log(secret);
     return this.jwt.signAsync(payload, { expiresIn: '15m', secret: secret });
   }
 

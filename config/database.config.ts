@@ -6,6 +6,7 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
+import { Ticket } from '../src/typeprm/entities/ticket.model';
 
 /*export default registerAs('database', () => ({
   type: 'mysql',
@@ -26,7 +27,7 @@ export default class TypeormConfig {
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_NAME'),
-      entities: [User, Code, Property],
+      entities: [User, Code, Property, Ticket],
       synchronize: true,
     };
   }
