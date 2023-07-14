@@ -4,6 +4,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import * as kavenegar from 'kavenegar';
+const api = kavenegar.KavenegarApi({
+  apikey:
+    '4F6E776F464271786B5535446C2B483959344B65567464444F6F4F6B363257365868624F30726D6173316B3D',
+});
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../typeprm/entities/user.model';
 import { Repository } from 'typeorm';
@@ -40,6 +45,17 @@ export class AuthService {
         user: user,
       });
       const savedOtpCode = await this.codeRepo.save(createdOtpCode);
+      api.Send(
+        {
+          message: savedOtpCode.code,
+          sender: '10008663',
+          receptor: '09941909765',
+        },
+        function (response, status) {
+          console.log(response);
+          console.log(status);
+        },
+      );
       return { otp_code: savedOtpCode.code };
     } else {
       const validOtp = await this.codeRepo.findOne({
