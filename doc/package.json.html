@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>package.json</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "package.json";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>package.json</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"property_management"</span>,
+  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.0.1"</span>,
+  <span class="hljs-attr">"description"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"author"</span>: <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"private"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"license"</span>: <span class="hljs-string">"UNLICENSED"</span>,
+  <span class="hljs-attr">"scripts"</span>: {
+    <span class="hljs-attr">"prebuild"</span>: <span class="hljs-string">"rimraf dist"</span>,
+    <span class="hljs-attr">"build"</span>: <span class="hljs-string">"nest build"</span>,
+    <span class="hljs-attr">"format"</span>: <span class="hljs-string">"prettier --write \"src/**/*.ts\" \"test/**/*.ts\""</span>,
+    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"nest start"</span>,
+    <span class="hljs-attr">"start:dev"</span>: <span class="hljs-string">"nest start --watch"</span>,
+    <span class="hljs-attr">"start:debug"</span>: <span class="hljs-string">"nest start --debug --watch"</span>,
+    <span class="hljs-attr">"start:prod"</span>: <span class="hljs-string">"node dist/main"</span>,
+    <span class="hljs-attr">"lint"</span>: <span class="hljs-string">"eslint \"{src,apps,libs,test}/**/*.ts\" --fix"</span>,
+    <span class="hljs-attr">"test"</span>: <span class="hljs-string">"jest"</span>,
+    <span class="hljs-attr">"test:watch"</span>: <span class="hljs-string">"jest --watch"</span>,
+    <span class="hljs-attr">"test:cov"</span>: <span class="hljs-string">"jest --coverage"</span>,
+    <span class="hljs-attr">"test:debug"</span>: <span class="hljs-string">"node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"</span>,
+    <span class="hljs-attr">"pretest:e2e"</span>: <span class="hljs-string">"npm run db:test:restart"</span>,
+    <span class="hljs-attr">"test:e2e"</span>: <span class="hljs-string">"dotenv -e .env.test -- jest --watch --no-cache --config ./test/jest-e2e.json"</span>,
+    <span class="hljs-attr">"db:test:rm"</span>: <span class="hljs-string">"docker compose rm test-db -s -f -v"</span>,
+    <span class="hljs-attr">"db:test:up"</span>: <span class="hljs-string">"docker compose up test-db -d"</span>,
+    <span class="hljs-attr">"db:test:restart"</span>: <span class="hljs-string">"npm run db:test:rm &amp;&amp; npm run db:test:up"</span>
+  },
+  <span class="hljs-attr">"dependencies"</span>: {
+    <span class="hljs-attr">"@nestjs/common"</span>: <span class="hljs-string">"^8.0.0"</span>,
+    <span class="hljs-attr">"@nestjs/config"</span>: <span class="hljs-string">"^2.3.1"</span>,
+    <span class="hljs-attr">"@nestjs/core"</span>: <span class="hljs-string">"^8.0.0"</span>,
+    <span class="hljs-attr">"@nestjs/jwt"</span>: <span class="hljs-string">"^10.0.3"</span>,
+    <span class="hljs-attr">"@nestjs/passport"</span>: <span class="hljs-string">"^9.0.3"</span>,
+    <span class="hljs-attr">"@nestjs/platform-express"</span>: <span class="hljs-string">"^8.0.0"</span>,
+    <span class="hljs-attr">"@nestjs/typeorm"</span>: <span class="hljs-string">"^9.0.1"</span>,
+    <span class="hljs-attr">"@types/passport-jwt"</span>: <span class="hljs-string">"^3.0.8"</span>,
+    <span class="hljs-attr">"argon2"</span>: <span class="hljs-string">"^0.30.3"</span>,
+    <span class="hljs-attr">"class-transformer"</span>: <span class="hljs-string">"^0.5.1"</span>,
+    <span class="hljs-attr">"class-validator"</span>: <span class="hljs-string">"^0.14.0"</span>,
+    <span class="hljs-attr">"express-session"</span>: <span class="hljs-string">"^1.17.3"</span>,
+    <span class="hljs-attr">"kavenegar"</span>: <span class="hljs-string">"^1.1.4"</span>,
+    <span class="hljs-attr">"mysql2"</span>: <span class="hljs-string">"^3.2.4"</span>,
+    <span class="hljs-attr">"passport"</span>: <span class="hljs-string">"^0.6.0"</span>,
+    <span class="hljs-attr">"passport-jwt"</span>: <span class="hljs-string">"^4.0.1"</span>,
+    <span class="hljs-attr">"passport-local"</span>: <span class="hljs-string">"^1.0.0"</span>,
+    <span class="hljs-attr">"reflect-metadata"</span>: <span class="hljs-string">"^0.1.13"</span>,
+    <span class="hljs-attr">"rimraf"</span>: <span class="hljs-string">"^3.0.2"</span>,
+    <span class="hljs-attr">"rxjs"</span>: <span class="hljs-string">"^7.2.0"</span>,
+    <span class="hljs-attr">"typeorm"</span>: <span class="hljs-string">"^0.3.15"</span>
+  },
+  <span class="hljs-attr">"devDependencies"</span>: {
+    <span class="hljs-attr">"@nestjs/cli"</span>: <span class="hljs-string">"^8.0.0"</span>,
+    <span class="hljs-attr">"@nestjs/schematics"</span>: <span class="hljs-string">"^8.0.0"</span>,
+    <span class="hljs-attr">"@nestjs/testing"</span>: <span class="hljs-string">"^8.0.0"</span>,
+    <span class="hljs-attr">"@types/express"</span>: <span class="hljs-string">"^4.17.13"</span>,
+    <span class="hljs-attr">"@types/jest"</span>: <span class="hljs-string">"27.5.0"</span>,
+    <span class="hljs-attr">"@types/node"</span>: <span class="hljs-string">"^16.0.0"</span>,
+    <span class="hljs-attr">"@types/supertest"</span>: <span class="hljs-string">"^2.0.11"</span>,
+    <span class="hljs-attr">"@typescript-eslint/eslint-plugin"</span>: <span class="hljs-string">"^5.0.0"</span>,
+    <span class="hljs-attr">"@typescript-eslint/parser"</span>: <span class="hljs-string">"^5.0.0"</span>,
+    <span class="hljs-attr">"docker"</span>: <span class="hljs-string">"^1.0.0"</span>,
+    <span class="hljs-attr">"dotenv-cli"</span>: <span class="hljs-string">"^7.2.1"</span>,
+    <span class="hljs-attr">"eslint"</span>: <span class="hljs-string">"^8.0.1"</span>,
+    <span class="hljs-attr">"eslint-config-prettier"</span>: <span class="hljs-string">"^8.3.0"</span>,
+    <span class="hljs-attr">"eslint-plugin-prettier"</span>: <span class="hljs-string">"^4.0.0"</span>,
+    <span class="hljs-attr">"jest"</span>: <span class="hljs-string">"28.0.3"</span>,
+    <span class="hljs-attr">"pactum"</span>: <span class="hljs-string">"^3.4.1"</span>,
+    <span class="hljs-attr">"prettier"</span>: <span class="hljs-string">"^2.3.2"</span>,
+    <span class="hljs-attr">"source-map-support"</span>: <span class="hljs-string">"^0.5.20"</span>,
+    <span class="hljs-attr">"supertest"</span>: <span class="hljs-string">"^6.1.3"</span>,
+    <span class="hljs-attr">"ts-jest"</span>: <span class="hljs-string">"28.0.1"</span>,
+    <span class="hljs-attr">"ts-loader"</span>: <span class="hljs-string">"^9.2.3"</span>,
+    <span class="hljs-attr">"ts-node"</span>: <span class="hljs-string">"^10.0.0"</span>,
+    <span class="hljs-attr">"tsconfig-paths"</span>: <span class="hljs-string">"4.0.0"</span>,
+    <span class="hljs-attr">"typescript"</span>: <span class="hljs-string">"^4.3.5"</span>
+  },
+  <span class="hljs-attr">"jest"</span>: {
+    <span class="hljs-attr">"moduleFileExtensions"</span>: [
+      <span class="hljs-string">"js"</span>,
+      <span class="hljs-string">"json"</span>,
+      <span class="hljs-string">"ts"</span>
+    ],
+    <span class="hljs-attr">"rootDir"</span>: <span class="hljs-string">"src"</span>,
+    <span class="hljs-attr">"testRegex"</span>: <span class="hljs-string">".*\\.spec\\.ts$"</span>,
+    <span class="hljs-attr">"transform"</span>: {
+      <span class="hljs-attr">"^.+\\.(t|j)s$"</span>: <span class="hljs-string">"ts-jest"</span>
+    },
+    <span class="hljs-attr">"collectCoverageFrom"</span>: [
+      <span class="hljs-string">"**/*.(t|j)s"</span>
+    ],
+    <span class="hljs-attr">"coverageDirectory"</span>: <span class="hljs-string">"../coverage"</span>,
+    <span class="hljs-attr">"testEnvironment"</span>: <span class="hljs-string">"node"</span>
+  }
+}
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>.eslintrc.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = ".eslintrc.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>.eslintrc.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">parser</span>: <span class="hljs-string">'@typescript-eslint/parser'</span>,
+  <span class="hljs-attr">parserOptions</span>: {
+    <span class="hljs-attr">project</span>: <span class="hljs-string">'tsconfig.json'</span>,
+    <span class="hljs-attr">tsconfigRootDir</span> : __dirname, 
+    <span class="hljs-attr">sourceType</span>: <span class="hljs-string">'module'</span>,
+  },
+  <span class="hljs-attr">plugins</span>: [<span class="hljs-string">'@typescript-eslint/eslint-plugin'</span>],
+  <span class="hljs-attr">extends</span>: [
+    <span class="hljs-string">'plugin:@typescript-eslint/recommended'</span>,
+    <span class="hljs-string">'plugin:prettier/recommended'</span>,
+  ],
+  <span class="hljs-attr">root</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">env</span>: {
+    <span class="hljs-attr">node</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">jest</span>: <span class="hljs-literal">true</span>,
+  },
+  <span class="hljs-attr">ignorePatterns</span>: [<span class="hljs-string">'.eslintrc.js'</span>],
+  <span class="hljs-attr">rules</span>: {
+    <span class="hljs-string">'@typescript-eslint/interface-name-prefix'</span>: <span class="hljs-string">'off'</span>,
+    <span class="hljs-string">'@typescript-eslint/explicit-function-return-type'</span>: <span class="hljs-string">'off'</span>,
+    <span class="hljs-string">'@typescript-eslint/explicit-module-boundary-types'</span>: <span class="hljs-string">'off'</span>,
+    <span class="hljs-string">'@typescript-eslint/no-explicit-any'</span>: <span class="hljs-string">'off'</span>,
+  },
+};
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

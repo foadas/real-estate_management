@@ -1,6 +1,6 @@
 import { AppModule } from '../src/app.module';
 import { Test } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from "@nestjs/common";
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 
 describe('App e2e', () => {
   let app: INestApplication;
