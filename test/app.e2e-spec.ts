@@ -44,6 +44,14 @@ describe('App e2e', () => {
           .expectStatus(201)
           .inspect();
       });
+      it('should throw 400 for duplicate',() => {
+        return pactum
+          .spec()
+          .post('/auth/signup')
+          .withBody(dto)
+          .expectStatus(201)
+          .inspect();
+      });
     });
     describe('Login',() => {
       it.todo('should signin');
