@@ -15,5 +15,18 @@ describe('App e2e', () => {
   afterAll(() => {
     app.close();
   });
-  it.todo('pass');
+  describe('Auth', () => {
+    describe('Signup', () => {});
+    describe('Login',() => {});
+
+  });
+  describe('Property', () => {
+    describe('Get Properties', () => {});
+    describe('Post Property', () => {});
+    describe('Update Property', () => {});
+    describe('Delete Property', () => {});
+  });
+  describe('ticket', () => {
+    describe('Post Ticket', () => {});
+  });
 });
