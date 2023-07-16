@@ -6,3 +6,4 @@
 - [x] improve error handling
 - [ ] changing some names to be more accurate
 - [x] adding ticket
+- [ ] fixing type of phone number to string

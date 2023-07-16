@@ -29,6 +29,7 @@ export default class TypeormConfig {
       database: configService.get<string>('DB_NAME'),
       entities: [User, Code, Property, Ticket],
       synchronize: true,
+      //dropSchema: configService.get<boolean>('DB_DROP'),
     };
   }
 }
