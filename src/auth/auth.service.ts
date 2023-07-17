@@ -1,11 +1,13 @@
 import {
-  BadRequestException, ConflictException,
+  BadRequestException,
+  ConflictException,
   ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,
-  NotFoundException
-} from "@nestjs/common";
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as kavenegar from 'kavenegar';
 const api = kavenegar.KavenegarApi({
   apikey:
@@ -19,7 +21,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Code } from '../typeprm/entities/code.model';
 import * as argon from 'argon2';
-import { response } from "express";
+import { response } from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -54,16 +56,17 @@ export class AuthService {
           sender: '10008663',
           receptor: '09941909765',
         },
-        function (response, status) {
+        /*function (response, status) {
           console.log(response);
           console.log(status);
-        },
+        },*/
       );
       return { otp_code: savedOtpCode.code };
     } else {
       const validOtp = await this.codeRepo.findOne({
         where: {
           user: user,
+          code: dto.code,
           is_used: false,
         },
       });
@@ -74,7 +77,9 @@ export class AuthService {
         await this.codeRepo.update(validOtp, { is_used: true });
         return { access_token: accessToken };
       } else {
-        return 'your code has been expired or not valid';
+        throw new UnauthorizedException(
+          'your code has been expired or not valid',
+        );
       }
     }
   }

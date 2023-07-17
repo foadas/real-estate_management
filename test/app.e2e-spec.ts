@@ -2,7 +2,7 @@ import { AppModule } from '../src/app.module';
 import { Test } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as pactum from 'pactum';
-import { SignupDto } from '../src/auth/dto';
+import { LoginDto, SignupDto } from '../src/auth/dto';
 describe('App e2e', () => {
   let app: INestApplication;
   beforeAll(async () => {
@@ -23,7 +23,7 @@ describe('App e2e', () => {
       const dto: SignupDto = {
         username: 'ali',
         password: '12345',
-        number: 112,
+        number: '9388322310',
       };
       it('should throw if email or number is empty', () => {
         return pactum
@@ -53,9 +53,46 @@ describe('App e2e', () => {
           .inspect();
       });
     });
-    describe('Login',() => {
+    describe('Login', () => {
+      const dto: LoginDto = {
+        number: '9388322310',
+        code: 1,
+      };
+      it('should ask for otp code', () => {
+        return pactum
+          .spec()
+          .post('/auth/login')
+          .withBody({ number: dto.number })
+          .expectStatus(201)
+          .inspect()
+          .stores('otp_code', 'otp_code');
 
-      it.todo('should signin');
+        //console.log(a)
+      });
+      it('invalid otp code', () =>{
+        return pactum
+          .spec()
+          .post('/auth/login')
+          .withBody({ number: dto.number, code: dto.code })
+          .expectStatus(401)
+          .inspect();
+      });
+      it('not found number', () => {
+        return pactum
+          .spec()
+          .post('/auth/login')
+          .withBody({ number: '9388322311', code: dto.code })
+          .expectStatus(404)
+          .inspect();
+      });
+      it('should login', () => {
+        return pactum
+          .spec()
+          .post('/auth/login')
+          .withBody({ number: dto.number, code: '$S{otp_code}' })
+          .expectStatus(201)
+          .inspect();
+      });
     });
   });
   describe('Property', () => {
