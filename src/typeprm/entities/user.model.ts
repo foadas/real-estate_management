@@ -15,7 +15,7 @@ export class User {
   password: string;
 
   @Column({ unique: true, nullable: false })
-  number: number;
+  number: string;
   @OneToMany(() => Code, (code) => code.user)
   codes: Code[];
   @OneToMany(() => Property, (property) => property.user)

@@ -103,10 +103,10 @@ export class AuthService {
     } catch (err: any) {
       if (err.code == 'ER_DUP_ENTRY') {
         throw new ConflictException('username or number already exists');
-      } else return err;
+      } else throw new HttpException('something went wrong', 500);
     }
   }
-  async signToken(userId: number, number: number): Promise<string> {
+  async signToken(userId: number, number: string): Promise<string> {
     const payload = {
       sub: userId,
       number,

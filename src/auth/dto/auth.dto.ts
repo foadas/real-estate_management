@@ -1,10 +1,11 @@
 import {
   IsNotEmpty,
-  IsNumber, IsOptional,
+  IsNumber, IsOptional, IsPhoneNumber,
   IsPositive,
   IsString, Max, Min,
   MinLength
-} from "class-validator";
+} from 'class-validator';
+import { PrimaryGeneratedColumn } from "typeorm";
 
 export class SignupDto {
   @IsNotEmpty()
@@ -14,17 +15,14 @@ export class SignupDto {
   @IsNotEmpty()
   @IsString()
   password: string;
-
   @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
-  number: number;
+  @IsPhoneNumber('IR')
+  number: string;
 }
 export class LoginDto {
   @IsNotEmpty()
-  @IsNumber()
-  @IsPositive()
-  number: number;
+  @IsPhoneNumber('IR')
+  number: string;
 
   @IsOptional()
   @IsNumber()
