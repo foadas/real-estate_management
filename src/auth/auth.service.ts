@@ -1,9 +1,11 @@
 import {
+  BadRequestException, ConflictException,
+  ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+  NotFoundException
+} from "@nestjs/common";
 import * as kavenegar from 'kavenegar';
 const api = kavenegar.KavenegarApi({
   apikey:
@@ -17,6 +19,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Code } from '../typeprm/entities/code.model';
 import * as argon from 'argon2';
+import { response } from "express";
 @Injectable()
 export class AuthService {
   constructor(
@@ -78,15 +81,15 @@ export class AuthService {
 
   async signup(dto: SignupDto) {
     try {
-      const user = await this.userRepo.findOne({
+      /*const user = await this.userRepo.findOne({
         where: [{ number: dto.number }, { username: dto.username }],
       });
       if (user) {
-        throw new HttpException(
-          'username or number already exists',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
+        response
+          .status(HttpStatus.BAD_REQUEST)
+          .send('You are not allowed to do that');
+        return;
+      }*/
       const hash = await argon.hash(dto.password);
       const createdUser = this.userRepo.create({
         username: dto.username,
@@ -98,7 +101,9 @@ export class AuthService {
       console.log(savedUser);
       return { your_info: savedUser };
     } catch (err: any) {
-      return err;
+      if (err.code == 'ER_DUP_ENTRY') {
+        throw new ConflictException('username or number already exists');
+      } else return err;
     }
   }
   async signToken(userId: number, number: number): Promise<string> {

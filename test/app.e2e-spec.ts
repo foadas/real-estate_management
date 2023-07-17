@@ -25,7 +25,7 @@ describe('App e2e', () => {
         password: '12345',
         number: 112,
       };
-      it('should throw if email is empty', () => {
+      it('should throw if email or number is empty', () => {
         return pactum
           .spec()
           .post('/auth/signup')
@@ -44,12 +44,12 @@ describe('App e2e', () => {
           .expectStatus(201)
           .inspect();
       });
-      it('should throw 400 for duplicate',() => {
+      it('should throw 409 for duplicate',() => {
         return pactum
           .spec()
           .post('/auth/signup')
           .withBody(dto)
-          .expectStatus(201)
+          .expectStatus(409)
           .inspect();
       });
     });
