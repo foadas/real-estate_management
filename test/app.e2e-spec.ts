@@ -4,6 +4,11 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as pactum from 'pactum';
 import { LoginDto, SignupDto } from '../src/auth/dto';
 describe('App e2e', () => {
+  const user = {
+    username: 'ali',
+    password: '12345',
+    number: '9388322310',
+  };
   let app: INestApplication;
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -20,11 +25,7 @@ describe('App e2e', () => {
   });
   describe('Auth', () => {
     describe('Signup', () => {
-      const dto: SignupDto = {
-        username: 'ali',
-        password: '12345',
-        number: '9388322310',
-      };
+      const dto: SignupDto = user;
       it('should throw if email or number is empty', () => {
         return pactum
           .spec()
@@ -69,7 +70,7 @@ describe('App e2e', () => {
 
         //console.log(a)
       });
-      it('invalid otp code', () =>{
+      it('invalid otp code', () => {
         return pactum
           .spec()
           .post('/auth/login')
@@ -90,18 +91,115 @@ describe('App e2e', () => {
           .spec()
           .post('/auth/login')
           .withBody({ number: dto.number, code: '$S{otp_code}' })
+          .stores('token', 'access_token')
           .expectStatus(201)
           .inspect();
       });
     });
   });
   describe('Property', () => {
-    describe('Get Properties', () => {});
-    describe('Post Property', () => {});
-    describe('Update Property', () => {});
-    describe('Delete Property', () => {});
+    describe('Post Property', () => {
+      it('should post a property', () => {
+        return pactum
+          .spec()
+          .post('/properties')
+          .withBody({ name: 'home', location: 'ahvaz', size: '50m' })
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(201)
+          .inspect();
+      });
+    });
+    describe('Get Properties', () => {
+      it('should get all properties', () => {
+        return pactum
+          .spec()
+          .get('/properties')
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+      it('should get properties with specific size ', () => {
+        return pactum
+          .spec()
+          .get('/properties')
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .withQueryParams({
+            size: '50m',
+            location: 'ahvaz',
+            name: 'home',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+
+    });
+    describe('Update Property', () => {
+      it('should update a property name', () => {
+        return pactum
+          .spec()
+          .patch('/properties/1')
+          .withBody({ name: 'home1' })
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+      it('should update a property size', () => {
+        return pactum
+          .spec()
+          .patch('/properties/1')
+          .withBody({ size: '12m' })
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+      it('should update a property location', () => {
+        return pactum
+          .spec()
+          .patch('/properties/1')
+          .withBody({ location: 'tehran' })
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+    });
+    describe('Delete Property', () => {
+      it('should delete a property', () => {
+        return pactum
+          .spec()
+          .delete('/properties/1')
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(200)
+          .inspect();
+      });
+    });
   });
   describe('ticket', () => {
-    describe('Post Ticket', () => {});
+    describe('Post Ticket', () => {
+      it('should post a ticket', () => {
+        return pactum
+          .spec()
+          .post('/ticket')
+          .withBody({ subject: 'test subject', body: 'test body' })
+          .withHeaders({
+            Authorization: 'Bearer $S{token}',
+          })
+          .expectStatus(201)
+          .inspect();
+      });
+    });
   });
 });

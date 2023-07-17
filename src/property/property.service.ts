@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Property } from '../typeprm/entities/property.model';
 import { Repository } from 'typeorm';
-import { PropertyDto } from '../auth/dto/property.dto';
-import { User } from "../typeprm/entities/user.model";
+import { PropertyDto, UpdatePropertyDto } from '../auth/dto/property.dto';
 
 @Injectable()
 export class PropertyService {
@@ -36,7 +35,7 @@ export class PropertyService {
     }
   }
 
-  async updateProperty(id, dto: PropertyDto, user: Express.User) {
+  async updateProperty(id, dto: UpdatePropertyDto, user: Express.User) {
     //check the user access
     try {
       const updatedProperty = this.propertyRepo.update(

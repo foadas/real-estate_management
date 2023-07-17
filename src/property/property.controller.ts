@@ -1,8 +1,21 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, Req, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Put,
+  Query,
+  Req,
+  UseGuards
+} from "@nestjs/common";
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { PropertyService } from './property.service';
-import { PropertyDto } from '../auth/dto/property.dto';
+import { PropertyDto, UpdatePropertyDto } from "../auth/dto/property.dto";
 
 @Controller('properties')
 export class PropertyController {
@@ -20,11 +33,11 @@ export class PropertyController {
     return this.propertyService.postProperty(req.user, dto);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
   async updatePropertyById(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updatedProperty: PropertyDto,
+    @Body() updatedProperty: UpdatePropertyDto,
     @Req() req: Request,
   ) {
     return this.propertyService.updateProperty(id, updatedProperty, req.user);
