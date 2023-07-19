@@ -2,10 +2,12 @@ version: '3.8'
 services:
   test-db:
     image: mysql
+    env_file:
+      - .env.test
     container_name: test
     ports:
       - "3307:3306"
     environment:
       #MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: foadas1381
-      MYSQL_DB: test
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DB: ${DB_NAME}
