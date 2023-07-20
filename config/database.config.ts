@@ -8,16 +8,6 @@ import {
 } from '@nestjs/typeorm';
 import { Ticket } from '../src/typeprm/entities/ticket.model';
 
-/*export default registerAs('database', () => ({
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: 'foadas1381',
-  database: 'property_management',
-  entities: [User, Code, Property],
-  synchronize: true,
-}));*/
 export default class TypeormConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
     return {
